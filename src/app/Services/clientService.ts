@@ -1,6 +1,6 @@
 import Client from "../models/client";
 
-class clientService{
+export default class clientService{
     public clients:Client[] = [];
     public addClient(client:Client):void{
         console.log("Adding client to the list");
@@ -34,5 +34,3 @@ class clientService{
         console.log("Client deleted");
     }
 }
-
-export default new clientService();

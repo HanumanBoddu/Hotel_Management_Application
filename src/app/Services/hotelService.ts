@@ -1,6 +1,6 @@
 import Hotel from "../models/Hotel";
 
-class hotelService{
+export default class hotelService{
    public hotels:Hotel[] = [];
    public addHotel(hotel:Hotel):void{
        console.log("Adding hotel to the list");
@@ -10,7 +10,7 @@ class hotelService{
     public getHotelById(id: number): Hotel | undefined {
         console.log("Getting hotel by id");
         return this.hotels.find(hotel => hotel.id === id);
-        console.log("get Hotel id function found");
+        console.log("get Hotel id function");
     }
     public getAllHotels(): Hotel[] {
         console.log("Getting all hotels");
@@ -36,4 +36,3 @@ class hotelService{
         console.log("Hotel deleted");
     }
 }
-export default new hotelService();
