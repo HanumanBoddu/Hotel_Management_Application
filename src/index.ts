@@ -26,13 +26,33 @@ clientService.addClient(Rohith);
 clientService.addClient(Ravi);
 
 function bookHotel(id:number,clientId:number,hotelId:number,roomNumber:number,checkInDate:Date,checkOutDate:Date){
-   const booking = new Booking(id,clientId,hotelId,roomNumber,checkInDate,checkOutDate);
-   bookingService.addBooking(booking);
-   console.log("Booking done successfully");
-}
+    const hotel = hotelService.getHotelById(hotelId);
+    if(hotel===undefined){
+        console.log("Hotel not found");
+        return ;
+    }
+    //if rooms are not available in this hotel please check other hotels with available rooms
+    if(hotel.rooms===0){
+        console.log("No rooms available");
+        console.log("Booking failed");
+        hotelService.getRemainingHotels().forEach(hotel=>console.log(`Check these Hotels with Available Rooms ${hotel.name}`));
+        return ;
+    }
+    if(hotel.rooms<0){
+        console.log("No rooms available");
+        console.log("Booking failed");
+        return ;
+    }
+    
+    const booking = new Booking(id,clientId,hotelId,roomNumber,checkInDate,checkOutDate);
+    bookingService.addBooking(booking);
+    hotel.rooms=hotel.rooms-roomNumber;
+    hotelService.updateHotel(hotelId,hotel);
+    console.log("Booking done successfully");
+ }
 
-bookHotel(1,1,1,1,new Date(2024,8,6),new Date(2024,8,10));
 bookHotel(2,2,3,3,new Date(2024,8,6),new Date(2024,8,10));
 bookHotel(3,3,3,1,new Date(2024,8,6),new Date(2024,8,10));
 
-console.log(bookingService.getAllBookings());
+// console.log(bookingService.getAllBookings());
+// console.log(hotelService.getAllHotels());
