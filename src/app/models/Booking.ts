@@ -1,4 +1,4 @@
-class Booking{
+export default class Booking{
     id:number;
     clientId:number;
     hotelId:number; 
