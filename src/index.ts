@@ -63,12 +63,6 @@ function bookHotel(id:number,clientId:number,hotelId:number,roomNumber:number,ch
     hotelService.updateHotel(hotelId,hotel);
     console.log("Booking done successfully");
  }
-
-// bookHotel(2,2,3,3,new Date(2024,8,6),new Date(2024,8,10));
-// bookHotel(3,3,3,1,new Date(2024,8,6),new Date(2024,8,10));
-
-// console.log(bookingService.getAllBookings());
-// console.log(hotelService.getAllHotels());
-
+ 
 bookHotel(4,4,4,1,new Date(2024,8,6),new Date(2024,8,10));
 bookHotel(5,4,1,1,new Date(2024,8,8),new Date(2024,8,9));
