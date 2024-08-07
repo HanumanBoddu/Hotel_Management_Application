@@ -4,6 +4,7 @@ import Client from "./app/models/client";
 import HotelService from "./app/Services/hotelService";
 import BookingService from "./app/Services/bookingService";
 import ClientService from "./app/Services/clientService";
+import {logger} from "./app/Logger/logger";
 
 const Kohinoor = new Hotel(1, "Kohinoor", 5, "Hyderabad");
 const IndianHotel = new Hotel(2, "IndianHotel", 10, "Bangalore");
@@ -33,18 +34,21 @@ function bookHotel(id:number,clientId:number,hotelId:number,roomNumber:number,ch
     const hotel = hotelService.getHotelById(hotelId);
     if(hotel===undefined){
         console.log("Hotel not found");
+        logger.error("Hotel not found");
         return ;
     }
     //if rooms are not available in this hotel please check other hotels with available rooms
     if(hotel.rooms===0){
         console.log("No rooms available");
         console.log("Booking failed");
+        logger.error("No rooms available");
         hotelService.getRemainingHotels().forEach(hotel=>console.log(`Check these Hotels with Available Rooms ${hotel.name}`));
         return ;
     }
     if(hotel.rooms<0){
         console.log("No rooms available");
         console.log("Booking failed");
+        logger.error("No rooms available");
         return ;
     }
 
@@ -54,6 +58,7 @@ function bookHotel(id:number,clientId:number,hotelId:number,roomNumber:number,ch
     if(isClientAlreadyBooked){
         console.log("Client already booked in some hotel in the same date range");
         console.log("Booking failed");
+        logger.error("Client already booked in some hotel in the same date range");
         return ;
     }
     
@@ -62,7 +67,9 @@ function bookHotel(id:number,clientId:number,hotelId:number,roomNumber:number,ch
     hotel.rooms=hotel.rooms-roomNumber;
     hotelService.updateHotel(hotelId,hotel);
     console.log("Booking done successfully");
+    logger.info("Booking done successfully");
  }
  
-bookHotel(4,4,4,1,new Date(2024,8,6),new Date(2024,8,10));
+bookHotel(1,1,1,1,new Date(2024,8,6),new Date(2024,8,10));
+//bookHotel(4,4,4,1,new Date(2024,8,6),new Date(2024,8,10));
 bookHotel(5,4,1,1,new Date(2024,8,8),new Date(2024,8,9));

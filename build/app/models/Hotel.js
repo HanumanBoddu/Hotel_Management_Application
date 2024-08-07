@@ -7,5 +7,21 @@ class Hotel {
         this.rooms = rooms;
         this.city = city;
     }
+    setId(id) { this.id = id; }
+    ;
+    getId() { return this.id; }
+    ;
+    setName(name) { this.name = name; }
+    ;
+    getName() { return this.name; }
+    ;
+    setRooms(rooms) { this.rooms = rooms; }
+    ;
+    getRooms() { return this.rooms; }
+    ;
+    setCity(city) { this.city = city; }
+    ;
+    getCity() { return this.city; }
+    ;
 }
 exports.default = Hotel;
